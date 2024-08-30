@@ -1,0 +1,74 @@
+openapi: true
+info:
+  title: STD23072 - TD3
+  version: '1.0.1'
+
+servers:
+  - url: https://localhost.std23072.com
+paths:
+  /meals:
+    get:
+      summary: Get a list of meals
+      parameters:
+        - name: page
+          in: query
+          description: Page number
+          required: true
+          schema:
+            type: integer
+        - name: pageSize
+          in: query
+          description: Page size
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: List of meals
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Meal'
+    post:
+      summary: Create a new meal
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Meal'
+      responses:
+        '201':
+          description: Created meal
+    put:
+      summary: Update an existing meal
+      parameters:
+        - name: id
+          in: path
+          description: Meal ID
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Meal'
+      responses:
+        '200':
+          description: Updated meal
+    delete:
+      summary: Delete a meal
+      parameters:
+        - name: id
+          in: path
+          description: Meal ID
+          required: true
+          schema:
+            type: string
+      responses:
+        '204':
+          description: Meal deleted
