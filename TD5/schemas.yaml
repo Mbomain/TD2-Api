@@ -1,0 +1,47 @@
+components:
+  schemas:
+    Customer:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        age:
+          type: integer
+    CustomerIdentifier:
+      type: object
+      properties:
+        id:
+          type: string
+    Meal:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        price:
+          type: number
+          format: float
+    Order:
+      type: object
+      properties:
+        id:
+          type: string
+        reference:
+          type: string
+        meals:
+          type: array
+          items:
+            type: object
+            properties:
+              meal:
+                $ref: '#/components/schemas/Meal'
+              quantity:
+                type: integer
+        orderDatetime:
+          type: string
+          format: date-time
